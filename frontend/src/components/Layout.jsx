@@ -7,7 +7,7 @@ import {
   CreditCard,
   LogOut,
   ShieldCheck,
-  UserCircle,
+  ShieldCheck,
 } from "lucide-react";
 
 export default function Layout() {

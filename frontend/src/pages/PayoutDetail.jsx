@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../config/api";
 import { useAuth } from "../context/AuthContext";
@@ -26,11 +26,7 @@ export default function PayoutDetail() {
   const [rejectReason, setRejectReason] = useState("");
   const [showRejectInput, setShowRejectInput] = useState(false);
 
-  useEffect(() => {
-    fetchPayoutDetails();
-  }, [id]);
-
-  const fetchPayoutDetails = async () => {
+  const fetchPayoutDetails = useCallback(async () => {
     try {
       const { data } = await api.get(`/payouts/${id}`);
       setPayoutData(data);
@@ -39,7 +35,11 @@ export default function PayoutDetail() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchPayoutDetails();
+  }, [fetchPayoutDetails]);
 
   const handleAction = async (actionUrl, payload = {}) => {
     setActionLoading(true);

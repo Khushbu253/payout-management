@@ -7,7 +7,6 @@ import {
   IndianRupee,
   CreditCard,
   Send,
-  Wallet,
   Tag,
   Info,
   ShieldCheck,
